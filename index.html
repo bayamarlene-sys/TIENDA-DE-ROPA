@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MAISON AURÉA – Moda de lujo</title>
+<style>
+:root{--bg:#faf7f2;--fg:#1a1714;--mut:#7a7168;--card:#fff;--line:#e6dfd3;--gold:#b08a4a}
+@media (prefers-color-scheme:dark){:root{--bg:#14120f;--fg:#f3ece0;--mut:#a39a8c;--card:#1d1a16;--line:#332e27;--gold:#d2ad6a}}
+html{scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Georgia,"Times New Roman",serif}
+a{color:inherit;text-decoration:none}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 5vw;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
+.logo{font-size:22px;letter-spacing:.35em;font-weight:400}
+.logo b{color:var(--gold);font-weight:400}
+nav{display:flex;gap:22px;font-family:Arial,sans-serif;font-size:12px;letter-spacing:.15em;text-transform:uppercase}
+nav a:hover{color:var(--gold)}
+.cart{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.1em;border:1px solid var(--fg);padding:8px 14px;cursor:pointer;background:none;color:var(--fg)}
+.hero{text-align:center;padding:90px 5vw;background:linear-gradient(135deg,#2a2218,#4a3a22 60%,#b08a4a);color:#f6eedd}
+.hero h1{font-size:clamp(32px,6vw,64px);font-weight:400;letter-spacing:.12em;margin:0 0 14px}
+.hero p{font-family:Arial,sans-serif;letter-spacing:.2em;font-size:13px;text-transform:uppercase;margin:0 0 28px;opacity:.85}
+.btn{display:inline-block;border:1px solid #f6eedd;padding:12px 30px;font-family:Arial,sans-serif;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#f6eedd}
+.btn:hover{background:#f6eedd;color:#2a2218}
+section{padding:60px 5vw}
+h2{text-align:center;font-weight:400;letter-spacing:.2em;text-transform:uppercase;font-size:22px;margin:0 0 8px}
+.sub{text-align:center;color:var(--mut);font-family:Arial,sans-serif;font-size:13px;margin-bottom:28px}
+.tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:34px}
+.tabs button{font-family:Arial,sans-serif;font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:none;color:var(--fg);border:1px solid var(--line);padding:9px 20px;cursor:pointer}
+.tabs button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px;max-width:1200px;margin:auto}
+.card{background:var(--card);border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,.12)}
+.img{aspect-ratio:1/1.1;display:flex;align-items:center;justify-content:center}
+.img svg{width:70%;height:70%}
+.info{padding:16px;text-align:center}
+.brand{font-family:Arial,sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.name{margin:6px 0;font-size:17px}
+.price{font-family:Arial,sans-serif;font-size:15px}
+.add{margin-top:12px;width:100%;padding:10px;background:none;border:1px solid var(--fg);color:var(--fg);font-family:Arial,sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer}
+.add:hover{background:var(--fg);color:var(--bg)}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;max-width:1200px;margin:auto}
+.cat{height:200px;display:flex;align-items:flex-end;padding:20px;font-size:22px;letter-spacing:.15em;text-transform:uppercase;color:#fff;cursor:pointer}
+footer{border-top:1px solid var(--line);padding:40px 5vw;text-align:center;color:var(--mut);font-family:Arial,sans-serif;font-size:12px;line-height:1.9}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:12px 22px;font-family:Arial,sans-serif;font-size:13px;opacity:0;transition:.3s;pointer-events:none}
+#toast.show{opacity:1}
+@media(max-width:640px){nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">MAISON <b>AURÉA</b></div>
+  <nav><a href="#catalogo">Catálogo</a><a href="#colecciones">Colecciones</a><a href="#contacto">Contacto</a></nav>
+  <button class="cart" id="cartBtn">BOLSA (<span id="count">0</span>) · $<span id="total">0</span></button>
+</header>
+
+<div class="hero">
+  <p>Colección Otoño · Invierno 2026</p>
+  <h1>EL LUJO A TU MEDIDA</h1>
+  <a class="btn" href="#catalogo">Ver catálogo</a>
+</div>
+
+<section id="colecciones">
+  <h2>Colecciones</h2>
+  <div class="sub">Moda de lujo para ella y para él</div>
+  <div class="cats">
+    <div class="cat" style="background:linear-gradient(135deg,#7a2e3b,#c28a8f)" onclick="setF('mujer')">Mujer</div>
+    <div class="cat" style="background:linear-gradient(135deg,#1f2d3d,#5c7690)" onclick="setF('hombre')">Hombre</div>
+    <div class="cat" style="background:linear-gradient(135deg,#4a3a22,#c9a35c)" onclick="setF('accesorios')">Accesorios</div>
+  </div>
+</section>
+
+<section id="catalogo">
+  <h2>Catálogo</h2>
+  <div class="sub">Piezas seleccionadas de las mejores casas de moda</div>
+  <div class="tabs" id="tabs"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<footer id="contacto">
+  <div class="logo" style="color:var(--fg)">MAISON <b>AURÉA</b></div>
+  Envíos internacionales · Devoluciones en 30 días · Atención personalizada<br>
+  contacto@maisonaurea.example · +591 000 00000<br>
+  © 2026 Maison Auréa. Todos los derechos reservados.
+</footer>
+<div id="toast"></div>
+
+<script>
+// Productos de ejemplo (marcas ficticias). Cambia nombres, precios y marcas por los reales.
+const P=[
+ {c:'mujer',b:'Valmont',n:'Vestido de seda largo',p:1850,t:'dress',k:'#8b2c3f',bg:'#f1dfe0'},
+ {c:'mujer',b:'Céline Noir',n:'Abrigo de cachemir',p:3200,t:'coat',k:'#c8a97e',bg:'#f3ebde'},
+ {c:'mujer',b:'Valmont',n:'Blusa de satén',p:690,t:'shirt',k:'#e8dcc8',bg:'#efe6ea'},
+ {c:'mujer',b:'Aurelle',n:'Tacones de cuero',p:920,t:'shoe',k:'#111',bg:'#e9e3dc'},
+ {c:'hombre',b:'Sartoria Milano',n:'Traje de lana azul',p:2900,t:'coat',k:'#1f3354',bg:'#dfe5ee'},
+ {c:'hombre',b:'Sartoria Milano',n:'Camisa de algodón egipcio',p:480,t:'shirt',k:'#f4f4f0',bg:'#e3e6e9'},
+ {c:'hombre',b:'Heritage & Co.',n:'Chaqueta de cuero',p:2350,t:'coat',k:'#3b2a20',bg:'#e8dfd6'},
+ {c:'hombre',b:'Aurelle',n:'Mocasines artesanales',p:780,t:'shoe',k:'#5a3720',bg:'#ebe3d9'},
+ {c:'accesorios',b:'Maison Auréa',n:'Bolso de piel italiana',p:2600,t:'bag',k:'#a3262f',bg:'#f2e2dd'},
+ {c:'accesorios',b:'Chronos Suisse',n:'Reloj automático oro',p:8900,t:'watch',k:'#c9a35c',bg:'#efe8d7'},
+ {c:'accesorios',b:'Vista Paris',n:'Gafas de sol de acetato',p:420,t:'glasses',k:'#222',bg:'#e5e8ea'},
+ {c:'accesorios',b:'Valmont',n:'Bufanda de seda estampada',p:350,t:'scarf',k:'#6a3d8f',bg:'#e9e0ee'}
+];
+const S={
+ dress:k=>`<path d="M40 10h20l5 25-8 8 18 52H25l18-52-8-8z" fill="${k}"/><path d="M42 10q8 14 16 0" fill="none" stroke="#fff" stroke-opacity=".5"/>`,
+ coat:k=>`<path d="M30 12l20 8 20-8 18 18-8 14-6-4v52H26V40l-6 4-8-14z" fill="${k}"/><path d="M50 20v74M44 40h-2M44 52h-2" stroke="#fff" stroke-opacity=".5" stroke-width="2"/>`,
+ shirt:k=>`<path d="M32 14l18 8 18-8 20 18-10 14-8-6v50H30V40l-8 6L12 32z" fill="${k}" stroke="#0003"/><path d="M50 22v64" stroke="#0003" stroke-width="2"/>`,
+ shoe:k=>`<path d="M14 62q20-4 28-26l12 6q4 14 28 16 8 2 8 14H14z" fill="${k}"/><rect x="14" y="78" width="76" height="6" fill="#0006"/>`,
+ bag:k=>`<path d="M36 40q0-24 14-24t14 24" fill="none" stroke="${k}" stroke-width="5"/><rect x="18" y="38" width="64" height="48" rx="6" fill="${k}"/><rect x="44" y="52" width="12" height="10" rx="2" fill="#e8c878"/>`,
+ watch:k=>`<rect x="38" y="6" width="24" height="30" fill="#3a3a3a"/><rect x="38" y="64" width="24" height="30" fill="#3a3a3a"/><circle cx="50" cy="50" r="26" fill="${k}"/><circle cx="50" cy="50" r="20" fill="#f7f1e3"/><path d="M50 50V36M50 50l10 6" stroke="#222" stroke-width="3" stroke-linecap="round"/>`,
+ glasses:k=>`<rect x="10" y="38" width="35" height="24" rx="10" fill="${k}"/><rect x="55" y="38" width="35" height="24" rx="10" fill="${k}"/><path d="M45 46h10M10 44L4 38M90 44l6-6" stroke="${k}" stroke-width="4"/>`,
+ scarf:k=>`<path d="M25 15h50v22q-25 14-50 0z" fill="${k}"/><path d="M38 40l-6 46 14-8 4 10 6-48zM58 40l8 44 12-10-2-34z" fill="${k}" opacity=".85"/>`
+};
+let F='todo',cnt=0,tot=0;
+const fmt=n=>n.toLocaleString('es');
+function tabs(){const L={todo:'Todo',mujer:'Mujer',hombre:'Hombre',accesorios:'Accesorios'};
+ document.getElementById('tabs').innerHTML=Object.keys(L).map(k=>`<button class="${k===F?'on':''}" onclick="setF('${k}')">${L[k]}</button>`).join('')}
+function render(){document.getElementById('grid').innerHTML=P.map((x,i)=>({x,i})).filter(o=>F==='todo'||o.x.c===F).map(({x,i})=>`
+ <div class="card"><div class="img" style="background:${x.bg}"><svg viewBox="0 0 100 100">${S[x.t](x.k)}</svg></div>
+ <div class="info"><div class="brand">${x.b}</div><div class="name">${x.n}</div><div class="price">$${fmt(x.p)} USD</div>
+ <button class="add" onclick="add(${i})">Añadir a la bolsa</button></div></div>`).join('')}
+function setF(k){F=k;tabs();render();document.getElementById('catalogo').scrollIntoView()}
+function add(i){cnt++;tot+=P[i].p;document.getElementById('count').textContent=cnt;document.getElementById('total').textContent=fmt(tot);
+ const t=document.getElementById('toast');t.textContent=P[i].n+' añadido a la bolsa';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800)}
+document.getElementById('cartBtn').onclick=()=>alert(cnt?`Tienes ${cnt} artículo(s). Total: $${fmt(tot)} USD`:'Tu bolsa está vacía');
+tabs();render();
+</script>
+</body>
+</html>
